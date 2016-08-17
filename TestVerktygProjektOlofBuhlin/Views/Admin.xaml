@@ -1,0 +1,22 @@
+﻿<Page x:Class="TestVerktygProjektOlofBuhlin.Views.Admin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestVerktygProjektOlofBuhlin.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="Admin">
+
+    <Grid>
+        <DockPanel Name="dp_Menu" Background="Gray" Height="20" Width="auto" Margin="0,0,0,0" VerticalAlignment="Top">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Navigation">
+                    <MenuItem Header="_Start" />
+                    <MenuItem Header="_Exit" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        
+    </Grid>
+</Page>
