@@ -24,10 +24,7 @@ namespace TestVerktygProjektOlofBuhlin
         {
             InitializeComponent();
 
-            using (var db = new TestVerktygContext)
-            {
-                // För att skapa ny student etc
-            }
+           
         }
     }
 }

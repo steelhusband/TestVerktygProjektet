@@ -6,7 +6,26 @@
         xmlns:local="clr-namespace:TestVerktygProjektOlofBuhlin"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+
+    <Grid Name="grid_start" Background="Gray">
+        <Label x:Name="lbl_logo"  Panel.ZIndex="1" Content="DigitaltTestVerktyg 3000" HorizontalAlignment="Left" Margin="129,48,0,0" VerticalAlignment="Top" Width="267" Height="45" FontWeight="Bold" FontSize="22"/>
+        <Label x:Name="lbl_loginChoice" Panel.ZIndex="1" Content="Vad vill du logga in som?" Margin="174,129,178,155" FontWeight="Bold"></Label>
+        <DockPanel Name="dp_Menu" Background="Gray" Height="20" Width="auto" Margin="0,0,0,0" VerticalAlignment="Top">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Navigation">
+                    <MenuItem Header="_Start" />
+                    <MenuItem Header="_Exit" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <StackPanel Name="sp_login" Height="100" Width="150" Margin="180,164,187,55">
+            <Button Name="btn_student" Content="Student" Height="30" Width="80" />
+            <Button Name="btn_teacher" Content="Lärare" Height="30" Width="80" />
+            <Button x:Name="btn_admin" Content="Admin" Height="30" Width="80" Margin="35,0" />
+
+        </StackPanel>
+
     </Grid>
+
 </Window>
