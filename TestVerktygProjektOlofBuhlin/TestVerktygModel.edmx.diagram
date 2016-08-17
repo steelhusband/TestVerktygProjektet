@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cd104795203d43e6a79a4d90768cec67" Name="Diagram1" >
+        <EntityTypeShape EntityType="TestVerktygModel.Student" Width="1.5" PointX="2.875" PointY="1" />
+        <EntityTypeShape EntityType="TestVerktygModel.Quiz" Width="1.5" PointX="6" PointY="4.375" />
+        <EntityTypeShape EntityType="TestVerktygModel.Admin" Width="1.5" PointX="6.125" PointY="1" />
+        <EntityTypeShape EntityType="TestVerktygModel.Teacher" Width="1.5" PointX="9" PointY="1" />
+        <AssociationConnector Association="TestVerktygModel.StudentQuiz" />
+        <AssociationConnector Association="TestVerktygModel.AdminQuiz" />
+        <AssociationConnector Association="TestVerktygModel.TeacherQuiz" />
+        <AssociationConnector Association="TestVerktygModel.AdminTeacher" />
+        <AssociationConnector Association="TestVerktygModel.AdminStudent" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

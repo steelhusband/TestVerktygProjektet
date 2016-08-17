@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TestVerktygModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TestVerktygModelStoreContainer">
+    <EntitySet Name="Students" EntityType="TestVerktygModel.Store.Students" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QuizSet" EntityType="TestVerktygModel.Store.QuizSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Admins" EntityType="TestVerktygModel.Store.Admins" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Teachers" EntityType="TestVerktygModel.Store.Teachers" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="StudentQuiz" Association="TestVerktygModel.Store.StudentQuiz">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Quiz" EntitySet="QuizSet" />
+    </AssociationSet>
+    <AssociationSet Name="AdminQuiz" Association="TestVerktygModel.Store.AdminQuiz">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Quiz" EntitySet="QuizSet" />
+    </AssociationSet>
+    <AssociationSet Name="TeacherQuiz" Association="TestVerktygModel.Store.TeacherQuiz">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Quiz" EntitySet="QuizSet" />
+    </AssociationSet>
+    <AssociationSet Name="AdminTeacher" Association="TestVerktygModel.Store.AdminTeacher">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Teacher" EntitySet="Teachers" />
+    </AssociationSet>
+    <AssociationSet Name="AdminStudent" Association="TestVerktygModel.Store.AdminStudent">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="StudentId" />
+    </Key>
+    <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AdminAdminId" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="QuizSet">
+    <Key>
+      <PropertyRef Name="QuizId" />
+    </Key>
+    <Property Name="QuizId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Grade" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="StudentStudentId" Type="int" Nullable="false" />
+    <Property Name="TeacherTeacherId" Type="int" Nullable="false" />
+    <Property Name="Admin_AdminId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Admins">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Teacher_TeacherId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="TeacherId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="StudentQuiz">
+    <End Role="Student" Type="TestVerktygModel.Store.Students" Multiplicity="1" />
+    <End Role="Quiz" Type="TestVerktygModel.Store.QuizSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentId" />
+      </Principal>
+      <Dependent Role="Quiz">
+        <PropertyRef Name="StudentStudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdminQuiz">
+    <End Role="Admin" Type="TestVerktygModel.Store.Admins" Multiplicity="1" />
+    <End Role="Quiz" Type="TestVerktygModel.Store.QuizSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="Quiz">
+        <PropertyRef Name="Admin_AdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TeacherQuiz">
+    <End Role="Teacher" Type="TestVerktygModel.Store.Teachers" Multiplicity="1" />
+    <End Role="Quiz" Type="TestVerktygModel.Store.QuizSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherId" />
+      </Principal>
+      <Dependent Role="Quiz">
+        <PropertyRef Name="TeacherTeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdminTeacher">
+    <End Role="Admin" Type="TestVerktygModel.Store.Admins" Multiplicity="*" />
+    <End Role="Teacher" Type="TestVerktygModel.Store.Teachers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherId" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="Teacher_TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdminStudent">
+    <End Role="Admin" Type="TestVerktygModel.Store.Admins" Multiplicity="0..1" />
+    <End Role="Student" Type="TestVerktygModel.Store.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="AdminAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TestVerktygModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="TestVerktygContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Students" EntityType="TestVerktygModel.Student" />
+          <EntitySet Name="QuizSet" EntityType="TestVerktygModel.Quiz" />
+          <EntitySet Name="Admins" EntityType="TestVerktygModel.Admin" />
+          <EntitySet Name="Teachers" EntityType="TestVerktygModel.Teacher" />
+          <AssociationSet Name="StudentQuiz" Association="TestVerktygModel.StudentQuiz">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Quiz" EntitySet="QuizSet" />
+          </AssociationSet>
+          <AssociationSet Name="AdminQuiz" Association="TestVerktygModel.AdminQuiz">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="Quiz" EntitySet="QuizSet" />
+          </AssociationSet>
+          <AssociationSet Name="TeacherQuiz" Association="TestVerktygModel.TeacherQuiz">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="Quiz" EntitySet="QuizSet" />
+          </AssociationSet>
+          <AssociationSet Name="AdminTeacher" Association="TestVerktygModel.AdminTeacher">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="Teacher" EntitySet="Teachers" />
+          </AssociationSet>
+          <AssociationSet Name="AdminStudent" Association="TestVerktygModel.AdminStudent">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <NavigationProperty Name="Quiz" Relationship="TestVerktygModel.StudentQuiz" FromRole="Student" ToRole="Quiz" />
+          <NavigationProperty Name="Admin" Relationship="TestVerktygModel.AdminStudent" FromRole="Student" ToRole="Admin" />
+          <Property Name="AdminAdminId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Quiz">
+          <Key>
+            <PropertyRef Name="QuizId" />
+          </Key>
+          <Property Name="QuizId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Grade" Type="String" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="TestVerktygModel.StudentQuiz" FromRole="Quiz" ToRole="Student" />
+          <Property Name="StudentStudentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="TestVerktygModel.AdminQuiz" FromRole="Quiz" ToRole="Admin" />
+          <NavigationProperty Name="Teacher" Relationship="TestVerktygModel.TeacherQuiz" FromRole="Quiz" ToRole="Teacher" />
+          <Property Name="TeacherTeacherId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="Quiz" Relationship="TestVerktygModel.AdminQuiz" FromRole="Admin" ToRole="Quiz" />
+          <NavigationProperty Name="Teacher" Relationship="TestVerktygModel.AdminTeacher" FromRole="Admin" ToRole="Teacher" />
+          <NavigationProperty Name="Student" Relationship="TestVerktygModel.AdminStudent" FromRole="Admin" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="TeacherId" />
+          </Key>
+          <Property Name="TeacherId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="Quiz" Relationship="TestVerktygModel.TeacherQuiz" FromRole="Teacher" ToRole="Quiz" />
+          <NavigationProperty Name="Admin" Relationship="TestVerktygModel.AdminTeacher" FromRole="Teacher" ToRole="Admin" />
+        </EntityType>
+        <Association Name="StudentQuiz">
+          <End Type="TestVerktygModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="TestVerktygModel.Quiz" Role="Quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="Quiz">
+              <PropertyRef Name="StudentStudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdminQuiz">
+          <End Type="TestVerktygModel.Admin" Role="Admin" Multiplicity="1" />
+          <End Type="TestVerktygModel.Quiz" Role="Quiz" Multiplicity="*" />
+        </Association>
+        <Association Name="TeacherQuiz">
+          <End Type="TestVerktygModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="TestVerktygModel.Quiz" Role="Quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="TeacherId" />
+            </Principal>
+            <Dependent Role="Quiz">
+              <PropertyRef Name="TeacherTeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AdminTeacher">
+          <End Type="TestVerktygModel.Admin" Role="Admin" Multiplicity="1" />
+          <End Type="TestVerktygModel.Teacher" Role="Teacher" Multiplicity="1" />
+        </Association>
+        <Association Name="AdminStudent">
+          <End Type="TestVerktygModel.Admin" Role="Admin" Multiplicity="0..1" />
+          <End Type="TestVerktygModel.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminId" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="AdminAdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestVerktygModelStoreContainer" CdmEntityContainer="TestVerktygContext">
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="IsTypeOf(TestVerktygModel.Student)">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="AdminAdminId" ColumnName="AdminAdminId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuizSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TestVerktygModel.Quiz)">
+        <MappingFragment StoreEntitySet="QuizSet">
+          <ScalarProperty Name="QuizId" ColumnName="QuizId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="StudentStudentId" ColumnName="StudentStudentId" />
+          <ScalarProperty Name="TeacherTeacherId" ColumnName="TeacherTeacherId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="IsTypeOf(TestVerktygModel.Admin)">
+        <MappingFragment StoreEntitySet="Admins">
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teachers">
+      <EntityTypeMapping TypeName="IsTypeOf(TestVerktygModel.Teacher)">
+        <MappingFragment StoreEntitySet="Teachers">
+          <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AdminQuiz" TypeName="TestVerktygModel.AdminQuiz" StoreEntitySet="QuizSet">
+      <EndProperty Name="Admin">
+        <ScalarProperty Name="AdminId" ColumnName="Admin_AdminId" />
+      </EndProperty>
+      <EndProperty Name="Quiz">
+        <ScalarProperty Name="QuizId" ColumnName="QuizId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AdminTeacher" TypeName="TestVerktygModel.AdminTeacher" StoreEntitySet="Admins">
+      <EndProperty Name="Teacher">
+        <ScalarProperty Name="TeacherId" ColumnName="Teacher_TeacherId" />
+      </EndProperty>
+      <EndProperty Name="Admin">
+        <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
