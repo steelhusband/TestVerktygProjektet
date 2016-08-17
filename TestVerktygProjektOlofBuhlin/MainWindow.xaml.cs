@@ -23,6 +23,11 @@ namespace TestVerktygProjektOlofBuhlin
         public MainWindow()
         {
             InitializeComponent();
+
+            using (var db = new TestVerktygContext)
+            {
+                // För att skapa ny student etc
+            }
         }
     }
 }
