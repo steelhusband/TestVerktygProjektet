@@ -5,11 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestVerktygProjektOlofBuhlin"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="480" Width="640">
 
     <Grid Name="grid_start" Background="Gray">
-        <Label x:Name="lbl_logo"  Panel.ZIndex="1" Content="DigitaltTestVerktyg 3000" HorizontalAlignment="Left" Margin="129,48,0,0" VerticalAlignment="Top" Width="267" Height="45" FontWeight="Bold" FontSize="22"/>
-        <Label x:Name="lbl_loginChoice" Panel.ZIndex="1" Content="Vad vill du logga in som?" Margin="174,129,178,155" FontWeight="Bold"></Label>
         <DockPanel Name="dp_Menu" Background="Gray" Height="20" Width="auto" Margin="0,0,0,0" VerticalAlignment="Top">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Navigation">
@@ -18,14 +16,18 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
+    
+        <DockPanel>
+            <Frame x:Name="_mainframe"/>
+        </DockPanel>
 
-        <StackPanel Name="sp_login" Height="100" Width="150" Margin="180,164,187,55">
-            <Button Name="btn_student" Content="Student" Height="30" Width="80" />
-            <Button Name="btn_teacher" Content="Lärare" Height="30" Width="80" />
-            <Button x:Name="btn_admin" Content="Admin" Height="30" Width="80" Margin="35,0" />
-
-        </StackPanel>
-
+            <Label x:Name="lbl_logo"  Panel.ZIndex="1" Content="DigitaltTestVerktyg 3000" HorizontalAlignment="Left" Margin="180,100,0,0" VerticalAlignment="Top" Width="267" Height="45" FontWeight="Bold" FontSize="22"/>
+            <Label x:Name="lbl_loginChoice" Panel.ZIndex="1" Content="Vad vill du logga in som?" Margin="238,186,232,233" FontWeight="Bold"></Label>
+                <StackPanel Name="sp_login" Height="100" Width="150" Margin="180,164,187,55">
+                    <Button Name="btn_student" Content="Student" Panel.ZIndex="1" Height="30" Width="80" Click="btn_student_Click" />
+                    <Button Name="btn_teacher" Content="Lärare" Panel.ZIndex="1" Height="30" Width="80" Click="btn_teacher_Click" />
+                    <Button x:Name="btn_admin" Content="Admin" Panel.ZIndex="1" Height="30" Width="80" Margin="35,0" Click="btn_admin_Click" />
+                 </StackPanel>
+    
     </Grid>
-
 </Window>

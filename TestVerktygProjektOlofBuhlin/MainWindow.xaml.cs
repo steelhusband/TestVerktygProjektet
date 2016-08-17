@@ -26,5 +26,20 @@ namespace TestVerktygProjektOlofBuhlin
 
            
         }
+
+        private void btn_student_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void btn_teacher_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_admin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
